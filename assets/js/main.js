@@ -211,3 +211,135 @@
   new PureCounter();
 
 })()
+
+
+// 
+"use strict";
+
+const testimonials = [
+  {
+    name: "Steve Miller", 
+    
+   work: "Actor at Hollywood Films Studio",
+   
+    photoUrl:"https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=ali-morshedlou-WMD64tMfc4k-unsplash.jpg",
+    
+    text: "sosanya Upholsteries and furnitures is a life saver! I just started a company, so there's no time to search for furnitures. too much paper works to go through and interiors to design.They took care of it all!"
+  },
+  {
+    name: " David Carter ", 
+    
+   work: "Lawyer at Smith & Associates Law Firm",
+   
+    photoUrl:"https://images.unsplash.com/photo-1504791635568-fa4993808e0a?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=royal-anwar-u5T5b3lNYw8-unsplash.jpg",
+    
+    text: "I recently purchased furniture from Sosanya Upholsteries and Furnitures and I am extremely satisfied. The staff was helpful and the furniture is beautiful !"
+  },
+  {
+    name: "Olivia Davis ", 
+    
+   work: "Graphic Designer at google",
+   
+    photoUrl:"https://images.unsplash.com/photo-1543132220-4bf3de6e10ae?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=redd-f-v6771a4avV4-unsplash.jpg",
+    
+    text: "Sosanya Upholsteries and Furnitures exceeded my expectations. Their furniture is top-notch in terms of quality and design. I highly recommend them!",
+  },
+  {
+      name: "Benjamin Wilson ", 
+    
+   work: "Accountant at ABC Accounting Services",
+   
+    photoUrl:"https://images.unsplash.com/photo-1534030347209-467a5b0ad3e6?ixlib=rb-4.0.3&q=85&fm=jpg&crop=entropy&cs=srgb&dl=gregory-hayes-h5cd51KXmRQ-unsplash.jpg",
+    
+    text: "Sosanya Upholsteries and Furnitures offers excellent furniture options. I am impressed with the craftsmanship and attention to detail. Highly recommended!"  },
+];
+
+const imgEl = document.querySelector("#testimonial-img");
+
+const workEl = document.querySelector(".testimonial-job");
+const textEl = document.querySelector(".testimonial-text");
+const usernameEl = document.querySelector("#testimonial-name");
+
+const btnRight = document.querySelector('.btn-right');
+
+const btnLeft = document.querySelector('.btn-left');
+
+const carouselBtn = document.querySelectorAll('.btn-dot')
+
+
+
+
+
+let idx = 0;
+
+const updateTestimonial= ()=> {
+  const { name, work, photoUrl, text } = testimonials[idx];
+
+  imgEl.src = photoUrl;
+  textEl.innerText = text;
+  usernameEl.innerText = name;
+  workEl.innerText = work;
+  
+  carouselBtn.forEach(btn=>btn.classList.remove('btn-dot-active'))
+    
+ 
+    carouselBtn[idx].classList.add('btn-dot-active')
+
+}
+
+
+const stopSlideshow = () =>
+  clearInterval(intervalId);
+
+
+  let intervalId;
+
+const startSlideshow = () => intervalId = setInterval(nextTestimonial, 4000);
+
+
+
+
+const nextTestimonial = () => {
+  idx++;
+  if (idx === testimonials.length) {
+    idx = 0;
+  }
+  updateTestimonial();
+  stopSlideshow()
+  startSlideshow();
+  
+  }
+  
+  const previousTestimonial = () => {
+  idx--;
+  if (idx < 0) {
+    idx = testimonials.length - 1;
+  }
+  updateTestimonial();
+  stopSlideshow()
+  startSlideshow();
+}
+
+
+btnRight.addEventListener('click', nextTestimonial);
+btnLeft.addEventListener('click', previousTestimonial);
+
+
+
+
+updateTestimonial();
+startSlideshow();
+
+
+carouselBtn.forEach((btn,i) =>{
+    
+    btn.addEventListener('click',function(){
+    carouselBtn.forEach(btn=>btn.classList.remove('btn-dot-active'))
+    
+    idx = i;
+    btn.classList.add('btn-dot-active')
+   updateTestimonial();
+  stopSlideshow()
+  startSlideshow();
+    }) })
+F
